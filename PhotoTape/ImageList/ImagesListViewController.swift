@@ -16,6 +16,7 @@ class ImagesListViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    func configCell(for cell: ImagesListCell) { }
 
 }
 
@@ -33,7 +34,17 @@ extension ImagesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier,
+                                                 for: indexPath)
+        
+        guard let imageListCell = cell as? ImagesListCell else {
+            print("не удалось скастить ячейку в (ImagesListViewController)")
+            return UITableViewCell()
+        }
+        
+        configCell(for: imageListCell)
+        
+        return imageListCell
     }
     
     
