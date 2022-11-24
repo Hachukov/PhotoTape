@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ImagesListViewController.swift
 //  PhotoTape
 //
 //  Created by Arsen Hachuk on 22.11.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ImagesListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
