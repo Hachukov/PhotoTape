@@ -27,6 +27,39 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Jq-5B-NDq" id="86N-sh-JjA">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="317"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR">
+                                                    <rect key="frame" x="335" y="11" width="27" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="Ro7-Ae-9K0"/>
+                                                        <constraint firstAttribute="width" constant="27" id="VL7-iR-T7F"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="Favorites Active" title="">
+                                                        <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                                    </buttonConfiguration>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 август 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-JJ-Y9O">
+                                                    <rect key="frame" x="28" y="293" width="119" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="YP White"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-3a-cA7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="317"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="topMargin" id="IKP-VH-9ZN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jf0-3a-cA7" secondAttribute="trailing" constant="-20" id="baT-9R-feI"/>
+                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="trailing" secondItem="86N-sh-JjA" secondAttribute="trailingMargin" id="dKD-Tz-o8Z"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="jf0-3a-cA7" secondAttribute="bottom" constant="-11" id="eLe-L6-vMt"/>
+                                                <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" constant="8" id="hNe-5I-fIF"/>
+                                                <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="bottom" secondItem="86N-sh-JjA" secondAttribute="bottomMargin" constant="8" id="kf9-fY-Tkf"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="topMargin" constant="-11" id="o9p-Yg-UgD"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" constant="-20" id="v6c-pf-9Tb"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FyQ-JJ-Y9O" secondAttribute="trailing" constant="20" symbolic="YES" id="zTP-P7-o6r"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -55,8 +88,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="0" width="200" height="132"/>
+        <image name="Favorites Active" width="44" height="39"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="YP White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
