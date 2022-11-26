@@ -18,49 +18,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9pk-yx-RSq">
-                                <rect key="frame" x="16" y="44" width="382" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" name="YP Black"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="317" id="4Jq-5B-NDq" customClass="ImagesListCell" customModule="PhotoTape" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="382" height="317"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="317"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Jq-5B-NDq" id="86N-sh-JjA">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="317"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="317"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR">
-                                                    <rect key="frame" x="335" y="11" width="27" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="Ro7-Ae-9K0"/>
-                                                        <constraint firstAttribute="width" constant="27" id="VL7-iR-T7F"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="Favorites Active" title="">
-                                                        <color key="baseForegroundColor" systemColor="systemPinkColor"/>
-                                                    </buttonConfiguration>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-3a-cA7" userLabel="Cell Image">
+                                                    <rect key="frame" x="20" y="11" width="374" height="295"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR" userLabel="Like Button">
+                                                    <rect key="frame" x="352" y="11" width="42" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="" image="Favorit Active">
+                                                        <color key="titleColor" name="YP red"/>
+                                                    </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 август 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-JJ-Y9O">
-                                                    <rect key="frame" x="28" y="293" width="119" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="28" y="282" width="94.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-3a-cA7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="317"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="topMargin" id="IKP-VH-9ZN"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="jf0-3a-cA7" secondAttribute="trailing" constant="-20" id="baT-9R-feI"/>
-                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="trailing" secondItem="86N-sh-JjA" secondAttribute="trailingMargin" id="dKD-Tz-o8Z"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="jf0-3a-cA7" secondAttribute="bottom" constant="-11" id="eLe-L6-vMt"/>
-                                                <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" constant="8" id="hNe-5I-fIF"/>
-                                                <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="bottom" secondItem="86N-sh-JjA" secondAttribute="bottomMargin" constant="8" id="kf9-fY-Tkf"/>
-                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="topMargin" constant="-11" id="o9p-Yg-UgD"/>
-                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" constant="-20" id="v6c-pf-9Tb"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FyQ-JJ-Y9O" secondAttribute="trailing" constant="20" symbolic="YES" id="zTP-P7-o6r"/>
+                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="top" secondItem="jf0-3a-cA7" secondAttribute="top" id="0cb-bq-ZjK"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="topMargin" id="0nu-qP-ODi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jf0-3a-cA7" secondAttribute="trailing" id="4TZ-iw-1Sx"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FyQ-JJ-Y9O" secondAttribute="trailing" constant="-8" id="5J1-xa-3rG"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="bottom" secondItem="FyQ-JJ-Y9O" secondAttribute="bottom" constant="8" id="Esy-3Q-lAD"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" id="O6M-aB-kro"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="jf0-3a-cA7" secondAttribute="bottom" id="XTu-KO-ysu"/>
+                                                <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="leading" secondItem="jf0-3a-cA7" secondAttribute="leading" constant="8" id="XaH-kA-RRm"/>
+                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="trailing" secondItem="jf0-3a-cA7" secondAttribute="trailing" id="nWC-9b-A1H"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="YP White (Alpha 50)"/>
+                                        <connections>
+                                            <outlet property="cellImage" destination="jf0-3a-cA7" id="6a7-9S-Dfu"/>
+                                            <outlet property="dateLabel" destination="FyQ-JJ-Y9O" id="NcE-tl-F0Q"/>
+                                            <outlet property="likeButton" destination="ndl-9U-ZBR" id="IZb-hc-sUo"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -72,10 +81,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9pk-yx-RSq" secondAttribute="trailing" constant="16" id="2I9-AH-Tvv"/>
-                            <constraint firstItem="9pk-yx-RSq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="C0D-zk-2L3"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="9pk-yx-RSq" secondAttribute="bottom" id="mbK-F8-ZXf"/>
-                            <constraint firstItem="9pk-yx-RSq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="raH-C0-1WT"/>
+                            <constraint firstAttribute="trailing" secondItem="9pk-yx-RSq" secondAttribute="trailing" id="2I9-AH-Tvv"/>
+                            <constraint firstAttribute="top" secondItem="9pk-yx-RSq" secondAttribute="top" id="C0D-zk-2L3"/>
+                            <constraint firstItem="9pk-yx-RSq" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="mbK-F8-ZXf"/>
+                            <constraint firstItem="9pk-yx-RSq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="raH-C0-1WT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -89,15 +98,18 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="Favorites Active" width="44" height="39"/>
+        <image name="Favorit Active" width="42" height="42"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="YP White (Alpha 50)">
+            <color red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="YP red">
+            <color red="0.96100002527236938" green="0.41999998688697815" blue="0.42399999499320984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

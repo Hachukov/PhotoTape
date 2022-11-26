@@ -11,12 +11,11 @@ class ImagesListViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    func configCell(for cell: ImagesListCell) { }
 
 }
 
@@ -46,6 +45,8 @@ extension ImagesListViewController: UITableViewDataSource {
         
         return imageListCell
     }
-    
-    
+}
+
+extension ImagesListViewController {
+    func configCell(for cell: ImagesListCell) { }
 }
