@@ -24,7 +24,6 @@ class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         photosName = Array(0..<20).map{"\($0)"}
     }
-
 }
 
 
