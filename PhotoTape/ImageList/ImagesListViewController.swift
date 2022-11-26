@@ -8,13 +8,21 @@
 import UIKit
 
 class ImagesListViewController: UIViewController {
-
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }()
+    
     @IBOutlet private var tableView: UITableView!
+    private var photosName = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        photosName = Array(0..<20).map{"\($0)"}
     }
 
 }
@@ -29,7 +37,7 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return photosName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,12 +49,27 @@ extension ImagesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        configCell(for: imageListCell)
+        configCell(for: imageListCell, with: indexPath)
         
         return imageListCell
     }
 }
-
+// MARK: - Конфигурация ячейки
 extension ImagesListViewController {
-    func configCell(for cell: ImagesListCell) { }
+  
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        let imageName = photosName[indexPath.row]
+        if let imageName = UIImage(named: imageName) {
+            cell.cellImage.image = imageName
+            cell.dateLabel.text = dateFormatter.string(from: Date())
+            if indexPath.row % 2 == 0 {
+                cell.likeButton.setImage(UIImage(named: "No Active"), for: .normal)
+            } else {
+                cell.likeButton.setImage(UIImage(named: "Favorit Active"), for: .normal)
+            }
+        } else {
+            return
+        }
+        
+    }
 }
