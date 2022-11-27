@@ -17,12 +17,12 @@ class ImagesListViewController: UIViewController {
     }()
     
     @IBOutlet private var tableView: UITableView!
-    private var photosName = [String]()
+    private var photoNames = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photosName = Array(0..<20).map{"\($0)"}
+        photoNames = Array(0..<20).map{"\($0)"}
     }
 }
 
@@ -36,7 +36,7 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photosName.count
+        return photoNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,7 +44,7 @@ extension ImagesListViewController: UITableViewDataSource {
                                                  for: indexPath)
         
         guard let imageListCell = cell as? ImagesListCell else {
-            print("не удалось скастить ячейку в (ImagesListViewController)")
+            assertionFailure("не удалось скастить ячейку в (ImagesListViewController)")
             return UITableViewCell()
         }
         
@@ -57,7 +57,7 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController {
   
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let imageName = photosName[indexPath.row]
+        let imageName = photoNames[indexPath.row]
         if let imageName = UIImage(named: imageName) {
             cell.cellImage.image = imageName
             cell.dateLabel.text = dateFormatter.string(from: Date())

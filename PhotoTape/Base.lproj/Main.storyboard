@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-3a-cA7" userLabel="Cell Image">
-                                                    <rect key="frame" x="20" y="11" width="374" height="295"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="309"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -38,12 +38,12 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR" userLabel="Like Button">
-                                                    <rect key="frame" x="352" y="11" width="42" height="42"/>
+                                                    <rect key="frame" x="352" y="0.0" width="42" height="42"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="" image="Favorit Active"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 август 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-JJ-Y9O">
-                                                    <rect key="frame" x="28" y="282" width="94.5" height="16"/>
+                                                    <rect key="frame" x="28" y="293" width="94.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
@@ -51,12 +51,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ndl-9U-ZBR" firstAttribute="top" secondItem="jf0-3a-cA7" secondAttribute="top" id="0cb-bq-ZjK"/>
-                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="topMargin" id="0nu-qP-ODi"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="top" id="0nu-qP-ODi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="jf0-3a-cA7" secondAttribute="trailing" id="4TZ-iw-1Sx"/>
                                                 <constraint firstItem="jf0-3a-cA7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FyQ-JJ-Y9O" secondAttribute="trailing" constant="-8" id="5J1-xa-3rG"/>
-                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="bottom" secondItem="FyQ-JJ-Y9O" secondAttribute="bottom" constant="8" id="Esy-3Q-lAD"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="bottom" secondItem="FyQ-JJ-Y9O" secondAttribute="bottom" id="Esy-3Q-lAD"/>
                                                 <constraint firstItem="jf0-3a-cA7" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" id="O6M-aB-kro"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="jf0-3a-cA7" secondAttribute="bottom" id="XTu-KO-ysu"/>
+                                                <constraint firstAttribute="bottom" secondItem="jf0-3a-cA7" secondAttribute="bottom" constant="8" id="XTu-KO-ysu"/>
                                                 <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="leading" secondItem="jf0-3a-cA7" secondAttribute="leading" constant="8" id="XaH-kA-RRm"/>
                                                 <constraint firstItem="ndl-9U-ZBR" firstAttribute="trailing" secondItem="jf0-3a-cA7" secondAttribute="trailing" id="nWC-9b-A1H"/>
                                             </constraints>
