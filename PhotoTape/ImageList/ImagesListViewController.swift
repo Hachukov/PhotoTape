@@ -57,14 +57,21 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController {
   
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24))
+        let likeImage = UIImage(systemName: "heart.fill", withConfiguration: config)
+        
         let imageName = photoNames[indexPath.row]
         if let imageName = UIImage(named: imageName) {
             cell.cellImage.image = imageName
             cell.dateLabel.text = dateFormatter.string(from: Date())
             if indexPath.row % 2 == 0 {
-                cell.likeButton.setImage(UIImage(named: "No Active"), for: .normal)
+                cell.likeButton.setImage(likeImage?.withTintColor(.YPWhiteAlpha50,
+                                                                  renderingMode: .alwaysOriginal)
+                                         , for: .normal)
             } else {
-                cell.likeButton.setImage(UIImage(named: "Favorit Active"), for: .normal)
+                cell.likeButton.setImage(likeImage?.withTintColor(.YPRed,
+                                                                  renderingMode: .alwaysOriginal),
+                                         for: .normal)
             }
         } else {
             return

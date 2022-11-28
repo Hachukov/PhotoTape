@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,28 +38,30 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR" userLabel="Like Button">
-                                                    <rect key="frame" x="352" y="0.0" width="42" height="42"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="" image="Favorit Active"/>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 август 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-JJ-Y9O">
-                                                    <rect key="frame" x="28" y="293" width="94.5" height="16"/>
+                                                    <rect key="frame" x="28" y="285" width="94.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR" userLabel="Like Button">
+                                                    <rect key="frame" x="363.5" y="12" width="20.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                                    <state key="normal" title="">
+                                                        <imageReference key="image" image="heart.fill" catalog="system" symbolScale="default"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="top" secondItem="jf0-3a-cA7" secondAttribute="top" id="0cb-bq-ZjK"/>
+                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="top" secondItem="jf0-3a-cA7" secondAttribute="top" constant="12" id="0cb-bq-ZjK"/>
                                                 <constraint firstItem="jf0-3a-cA7" firstAttribute="top" secondItem="86N-sh-JjA" secondAttribute="top" id="0nu-qP-ODi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="jf0-3a-cA7" secondAttribute="trailing" id="4TZ-iw-1Sx"/>
                                                 <constraint firstItem="jf0-3a-cA7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FyQ-JJ-Y9O" secondAttribute="trailing" constant="-8" id="5J1-xa-3rG"/>
-                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="bottom" secondItem="FyQ-JJ-Y9O" secondAttribute="bottom" id="Esy-3Q-lAD"/>
+                                                <constraint firstItem="jf0-3a-cA7" firstAttribute="bottom" secondItem="FyQ-JJ-Y9O" secondAttribute="bottom" constant="8" id="Esy-3Q-lAD"/>
                                                 <constraint firstItem="jf0-3a-cA7" firstAttribute="leading" secondItem="86N-sh-JjA" secondAttribute="leadingMargin" id="O6M-aB-kro"/>
                                                 <constraint firstAttribute="bottom" secondItem="jf0-3a-cA7" secondAttribute="bottom" constant="8" id="XTu-KO-ysu"/>
                                                 <constraint firstItem="FyQ-JJ-Y9O" firstAttribute="leading" secondItem="jf0-3a-cA7" secondAttribute="leading" constant="8" id="XaH-kA-RRm"/>
-                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="trailing" secondItem="jf0-3a-cA7" secondAttribute="trailing" id="nWC-9b-A1H"/>
+                                                <constraint firstItem="ndl-9U-ZBR" firstAttribute="trailing" secondItem="jf0-3a-cA7" secondAttribute="trailing" constant="-10" id="nWC-9b-A1H"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="YP Background"/>
@@ -95,7 +98,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="Favorit Active" width="42" height="42"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <namedColor name="YP Background">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
