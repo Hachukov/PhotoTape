@@ -44,8 +44,8 @@
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR" userLabel="Like Button">
-                                                    <rect key="frame" x="363.5" y="12" width="20.5" height="18"/>
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-9U-ZBR" userLabel="Like Button">
+                                                    <rect key="frame" x="363.5" y="12" width="20.5" height="26"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                     <state key="normal" title="">
                                                         <imageReference key="image" image="heart.fill" catalog="system" symbolScale="default"/>

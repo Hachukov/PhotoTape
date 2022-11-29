@@ -65,11 +65,11 @@ extension ImagesListViewController {
             cell.cellImage.image = imageName
             cell.dateLabel.text = dateFormatter.string(from: Date())
             if indexPath.row % 2 == 0 {
-                cell.likeButton.setImage(likeImage?.withTintColor(.YPWhiteAlpha50,
+                cell.likeButton.setImage(likeImage?.withTintColor(.ypWhiteAlpha50,
                                                                   renderingMode: .alwaysOriginal)
                                          , for: .normal)
             } else {
-                cell.likeButton.setImage(likeImage?.withTintColor(.YPRed,
+                cell.likeButton.setImage(likeImage?.withTintColor(.ypRed,
                                                                   renderingMode: .alwaysOriginal),
                                          for: .normal)
             }
