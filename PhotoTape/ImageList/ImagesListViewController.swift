@@ -64,15 +64,11 @@ extension ImagesListViewController {
         if let imageName = UIImage(named: imageName) {
             cell.cellImage.image = imageName
             cell.dateLabel.text = dateFormatter.string(from: Date())
-            if indexPath.row % 2 == 0 {
-                cell.likeButton.setImage(likeImage?.withTintColor(.ypWhiteAlpha50,
-                                                                  renderingMode: .alwaysOriginal)
-                                         , for: .normal)
-            } else {
-                cell.likeButton.setImage(likeImage?.withTintColor(.ypRed,
-                                                                  renderingMode: .alwaysOriginal),
-                                         for: .normal)
-            }
+            let likeTintColor: UIColor = indexPath.row % 2 == 0 ? .ypWhiteAlpha50 : .ypRed
+            cell.likeButton.setImage(likeImage?.withTintColor(likeTintColor,
+                                                              renderingMode: .alwaysOriginal),
+                                     for: .normal)
+            
         } else {
             return
         }
