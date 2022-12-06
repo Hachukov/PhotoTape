@@ -118,12 +118,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oE4-PL-I03" userLabel="Logout">
                                 <rect key="frame" x="368" y="114" width="20" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="VJx-hi-Z24"/>
                                     <constraint firstAttribute="height" constant="22" id="hII-og-bF3"/>
                                 </constraints>
                                 <color key="tintColor" name="YP Red"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button" image="logout"/>
+                                <state key="normal" image="logout"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="wGY-VR-vgA" eventType="touchUpInside" id="zV8-Qe-rtM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-Zv-HJg">
                                 <rect key="frame" x="16" y="168" width="216.5" height="27"/>
@@ -142,15 +144,22 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="oE4-PL-I03" firstAttribute="top" secondItem="qp7-an-i6F" secondAttribute="top" constant="70" id="0n7-xT-cWD"/>
-                            <constraint firstItem="agf-14-Rcu" firstAttribute="leading" secondItem="qp7-an-i6F" secondAttribute="leading" constant="16" id="Ihl-q1-wu1"/>
+                            <constraint firstItem="agf-14-Rcu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qp7-an-i6F" secondAttribute="leading" id="Ihl-q1-wu1"/>
                             <constraint firstItem="agf-14-Rcu" firstAttribute="top" secondItem="wOZ-Zv-HJg" secondAttribute="bottom" constant="8" id="LLj-ur-I31"/>
-                            <constraint firstItem="wOZ-Zv-HJg" firstAttribute="leading" secondItem="qp7-an-i6F" secondAttribute="leading" constant="16" id="NNK-uN-MTP"/>
+                            <constraint firstItem="wOZ-Zv-HJg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qp7-an-i6F" secondAttribute="leading" id="NNK-uN-MTP"/>
                             <constraint firstItem="wOZ-Zv-HJg" firstAttribute="top" secondItem="0Zo-dG-2tU" secondAttribute="bottom" constant="8" id="Wxt-h9-yKr"/>
                             <constraint firstItem="0Zo-dG-2tU" firstAttribute="centerY" secondItem="oE4-PL-I03" secondAttribute="centerY" id="eNc-W3-tnw"/>
                             <constraint firstItem="0Zo-dG-2tU" firstAttribute="leading" secondItem="qp7-an-i6F" secondAttribute="leading" constant="16" id="f87-zr-7bl"/>
                             <constraint firstItem="qp7-an-i6F" firstAttribute="trailing" secondItem="oE4-PL-I03" secondAttribute="trailing" constant="26" id="h3u-ct-B3y"/>
+                            <constraint firstItem="qp7-an-i6F" firstAttribute="trailing" secondItem="wOZ-Zv-HJg" secondAttribute="trailing" constant="181.5" id="hjy-8x-xIt"/>
+                            <constraint firstItem="qp7-an-i6F" firstAttribute="trailing" secondItem="agf-14-Rcu" secondAttribute="trailing" constant="306" id="rlx-1c-fuT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mailLabel" destination="agf-14-Rcu" id="kbn-EC-Osc"/>
+                        <outlet property="nameLabel" destination="wOZ-Zv-HJg" id="Any-kE-3qB"/>
+                        <outlet property="profileImage" destination="0Zo-dG-2tU" id="6aI-AC-1H1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p5S-yJ-Mzf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
