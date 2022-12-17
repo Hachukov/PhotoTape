@@ -9,6 +9,8 @@ import UIKit
 
 class ImagesListViewController: UIViewController {
     
+    private var showSingleImageID = "ShowSingleImage"
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -24,13 +26,24 @@ class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         photoNames = Array(0..<20).map{"\($0)"}
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showSingleImageID {
+            let viewController = segue.destination as! SingleImageViewController
+            let indexPath = sender as! IndexPath
+            let image = UIImage(named: photoNames[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
 }
 
 
 // MARK: - TableView
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: showSingleImageID, sender: indexPath)
     }
 }
 
@@ -53,6 +66,7 @@ extension ImagesListViewController: UITableViewDataSource {
         return imageListCell
     }
 }
+
 // MARK: - Конфигурация ячейки
 extension ImagesListViewController {
   
