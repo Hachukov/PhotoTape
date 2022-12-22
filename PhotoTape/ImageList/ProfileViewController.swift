@@ -8,52 +8,76 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+  
+    private let profileImage: UIImageView = {
+        let profileImage = UIImageView()
+        profileImage.translatesAutoresizingMaskIntoConstraints = false
+        profileImage.image = UIImage(named: "Photo")
+        
+        return profileImage
+    }()
+    
+    private let nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.text = "Екатерина Новикова"
+        nameLabel.textColor = .ypWhite
+        return nameLabel
+    }()
+    
+    private let mailLabel: UILabel = {
+        let mailLabel = UILabel()
+        mailLabel.translatesAutoresizingMaskIntoConstraints = false
+        mailLabel.text = "@ekaterina_nov"
+        mailLabel.textColor = .ypGray
+        mailLabel.font = UIFont(name: "YS Display-Medium", size: 13)
+        return mailLabel
+    }()
 
-
+    private let logoutButton: UIButton = {
+        let logoutButton = UIButton()
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.setImage(UIImage(systemName: "ipad.and.arrow.forward"), for: .normal) 
+        logoutButton.tintColor = .ypRed
+        return logoutButton
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let profileImage = UIImageView()
-        profileImage.image = UIImage(named: "Photo")
-        profileImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileImage)
-        profileImage.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        profileImage.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        profileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                              constant: 20).isActive = true
-        profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                          constant: 20).isActive = true
-        
-        let nameLabel = UILabel()
-        nameLabel.text = "Екатерина Новикова"
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
-        nameLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: profileImage.leadingAnchor).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 8).isActive = true
-        nameLabel.textColor = .white
-        
-        let mailLabel = UILabel()
-        mailLabel.text = "@ekaterina_nov"
-        mailLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(mailLabel)
-        mailLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        mailLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        mailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
-        mailLabel.textColor = .ypGray
-        mailLabel.font = UIFont(name: "YS Display-Medium", size: 13)
+        view.addSubview(logoutButton)
         
-        let logoutImag = UIImageView()
-        logoutImag.image = UIImage(systemName: "ipad.and.arrow.forward")
-        logoutImag.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logoutImag)
-        logoutImag.heightAnchor.constraint(equalToConstant: 22).isActive = true
-        logoutImag.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        logoutImag.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
-        logoutImag.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                             constant: -26).isActive = true
-        logoutImag.tintColor = .ypRed
+        addConstraints()
         
+    }
+    
+    private func addConstraints() {
+        var constraints = [NSLayoutConstraint]()
+        // Установка констрейнтов
+        constraints.append(profileImage.heightAnchor.constraint(equalToConstant: 70))
+        constraints.append(profileImage.widthAnchor.constraint(equalToConstant: 70))
+        constraints.append(profileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                                                 constant: 16))
+        constraints.append(profileImage.topAnchor.constraint(equalTo: view.topAnchor,
+                                                             constant: 76))
+        
+        constraints.append(nameLabel.heightAnchor.constraint(equalToConstant: 23))
+        constraints.append(nameLabel.leadingAnchor.constraint(equalTo: profileImage.leadingAnchor))
+        constraints.append(nameLabel.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 8))
+        
+        constraints.append(mailLabel.heightAnchor.constraint(equalToConstant: 18))
+        constraints.append(mailLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor))
+        constraints.append(mailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8))
+        
+        constraints.append(logoutButton.heightAnchor.constraint(equalToConstant: 22))
+        constraints.append(logoutButton.widthAnchor.constraint(equalToConstant: 20))
+        constraints.append(logoutButton.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor))
+        constraints.append(logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26))
+        
+        // Астивируем констрэинты
+        NSLayoutConstraint.activate(constraints)
     }
 }
