@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController {
     
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
-        // Установка констрейнтов
+
         constraints.append(profileImage.heightAnchor.constraint(equalToConstant: 70))
         constraints.append(profileImage.widthAnchor.constraint(equalToConstant: 70))
         constraints.append(profileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
@@ -77,7 +77,7 @@ class ProfileViewController: UIViewController {
         constraints.append(logoutButton.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor))
         constraints.append(logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26))
         
-        // Астивируем констрэинты
+       
         NSLayoutConstraint.activate(constraints)
     }
 }
