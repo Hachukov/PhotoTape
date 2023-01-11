@@ -22,6 +22,9 @@
                         <color key="backgroundColor" name="YP Background"/>
                     </view>
                     <navigationItem key="navigationItem" id="wWA-xw-qCz"/>
+                    <connections>
+                        <segue destination="3MO-qg-dEq" kind="presentation" identifier="ShowWebView" modalPresentationStyle="overFullScreen" id="nUX-ei-UaT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I2J-c5-YB5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -35,7 +38,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="9fa-1F-7Xv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t8X-Wo-MDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -295,9 +297,6 @@
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>

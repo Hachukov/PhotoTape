@@ -9,6 +9,8 @@ import UIKit
 
 class AuthViewController: UIViewController {
     
+    let sigwayIdForWebView = "ShowWebView"
+    
     private let unsplashLogo: UIImageView = {
         let unsplashLogo = UIImageView()
         unsplashLogo.translatesAutoresizingMaskIntoConstraints = false
@@ -24,6 +26,10 @@ class AuthViewController: UIViewController {
         loginButton.setTitleColor(UIColor.ypBlack, for: .normal)
         loginButton.layer.cornerRadius = 16
         loginButton.layer.masksToBounds = true
+        loginButton.addTarget(nil,
+                              action: #selector(presentWebView),
+                              for: .touchUpInside)
+       
         return loginButton
     }()
     
@@ -51,5 +57,11 @@ class AuthViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
- 
+    
+    @objc func presentWebView() {
+        performSegue(withIdentifier: sigwayIdForWebView, sender: nil)
+       
+    }
+    
 }
+
