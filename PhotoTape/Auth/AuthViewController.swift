@@ -34,8 +34,7 @@ class AuthViewController: UIViewController {
         
         addConstraints()
     }
-    
-    
+
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
         
@@ -52,6 +51,5 @@ class AuthViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
-    
-    
+ 
 }
