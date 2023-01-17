@@ -10,6 +10,7 @@ import WebKit
 
 class WebViewViewController: UIViewController{
     
+    private let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     
     private let backwardButton: UIButton = {
         let backwardButton = UIButton()
@@ -28,13 +29,36 @@ class WebViewViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.addSubview(wVCWebView)
         view.addSubview(backwardButton)
-        let myURL = URL(string: "https://www.apple.com")
-        let myRequest = URLRequest(url: myURL!)
-        wVCWebView.load(myRequest)
+        wVCWebView.navigationDelegate = self
+        var urlComponents = URLComponents(string: unsplashAuthorizeURLString)!
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: accessKey),
+            URLQueryItem(name: "redirect_uri", value: redirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: accessScope)
+        ]
+        let url = urlComponents.url!
+        let request = URLRequest(url: url)
+        wVCWebView.load(request)
         addConstraints()
+    }
+    
+    // получаем значение code из навигационного действия navigationAction URL
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code" })
+                
+        {
+            return codeItem.value
+        } else {
+            return nil
+        }
     }
     
     private func addConstraints() {
@@ -64,5 +88,16 @@ class WebViewViewController: UIViewController{
     
     @objc private func didTapBackButton() {
         dismiss(animated: true)
+    }
+}
+// реализация метода WKNavigationDelegate
+extension WebViewViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let code = code(from: navigationAction) {
+            //TODO:  process code
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
     }
 }

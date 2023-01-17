@@ -10,6 +10,7 @@
 		0B1CD577296B397B008AAFD4 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CD576296B397A008AAFD4 /* Constans.swift */; };
 		0B1CD579296D5506008AAFD4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CD578296D5506008AAFD4 /* AuthViewController.swift */; };
 		0B1CD57C296EA372008AAFD4 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CD57B296EA372008AAFD4 /* WebViewViewController.swift */; };
+		0B1CD57E2976BC61008AAFD4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1CD57D2976BC61008AAFD4 /* Protocols.swift */; };
 		0B24C14D293E6D5800ED0AE8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24C14C293E6D5800ED0AE8 /* ProfileViewController.swift */; };
 		0B24C151293FBF5300ED0AE8 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B24C14F293FBF5300ED0AE8 /* YS Display-Medium.ttf */; };
 		0B24C152293FBF5300ED0AE8 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B24C150293FBF5300ED0AE8 /* YS Display-Bold.ttf */; };
@@ -28,6 +29,7 @@
 		0B1CD576296B397A008AAFD4 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		0B1CD578296D5506008AAFD4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0B1CD57B296EA372008AAFD4 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		0B1CD57D2976BC61008AAFD4 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		0B24C14C293E6D5800ED0AE8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0B24C14F293FBF5300ED0AE8 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		0B24C150293FBF5300ED0AE8 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				0B24C14E293FBF4200ED0AE8 /* Fonts */,
 				0B7815B1292E1F9400917F23 /* UIColor+Extentions.swift */,
 				0B1CD576296B397A008AAFD4 /* Constans.swift */,
+				0B1CD57D2976BC61008AAFD4 /* Protocols.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				0B1CD57C296EA372008AAFD4 /* WebViewViewController.swift in Sources */,
 				0B24C14D293E6D5800ED0AE8 /* ProfileViewController.swift in Sources */,
 				0B7815B2292E1F9500917F23 /* UIColor+Extentions.swift in Sources */,
+				0B1CD57E2976BC61008AAFD4 /* Protocols.swift in Sources */,
 				0B1CD577296B397B008AAFD4 /* Constans.swift in Sources */,
 				0B55F5E7292D2BAF00DA6586 /* ImagesListViewController.swift in Sources */,
 				0B24C15429426CDA00ED0AE8 /* SingleImageViewController.swift in Sources */,
