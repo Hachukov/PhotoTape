@@ -12,11 +12,14 @@ class WebViewViewController: UIViewController{
     
     private let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     
+    weak var delegate: WebViewViewControllerDelegate?
+    
     private let backwardButton: UIButton = {
         let backwardButton = UIButton()
         backwardButton.setImage(UIImage(named: "Backward"), for: .normal)
         backwardButton.translatesAutoresizingMaskIntoConstraints = false
         backwardButton.tintColor = .ypBlack
+        backwardButton.backgroundColor = .ypBlack
         backwardButton.addTarget(nil, action: #selector(didTapBackButton), for: .touchUpInside)
         return backwardButton
     }()
@@ -31,7 +34,9 @@ class WebViewViewController: UIViewController{
         super.viewDidLoad()
         view.addSubview(wVCWebView)
         view.addSubview(backwardButton)
+        
         wVCWebView.navigationDelegate = self
+        
         var urlComponents = URLComponents(string: unsplashAuthorizeURLString)!
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: accessKey),
@@ -40,11 +45,14 @@ class WebViewViewController: UIViewController{
             URLQueryItem(name: "scope", value: accessScope)
         ]
         let url = urlComponents.url!
+        
         let request = URLRequest(url: url)
+        
         wVCWebView.load(request)
         addConstraints()
     }
     
+
     // получаем значение code из навигационного действия navigationAction URL
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
@@ -87,14 +95,15 @@ class WebViewViewController: UIViewController{
     }
     
     @objc private func didTapBackButton() {
-        dismiss(animated: true)
+       
+        delegate?.webViewViewControllerDidCancel(self)
     }
 }
 // реализация метода WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {
-            //TODO:  process code
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)

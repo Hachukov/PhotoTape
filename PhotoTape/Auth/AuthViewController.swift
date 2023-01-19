@@ -60,8 +60,31 @@ class AuthViewController: UIViewController {
     
     @objc func presentWebView() {
         performSegue(withIdentifier: sigwayIdForWebView, sender: nil)
-       
+        
+        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == sigwayIdForWebView {
+                guard
+                    let webViewController = segue.destination as? WebViewViewController
+                else { fatalError("Failed to prepare for \(sigwayIdForWebView)") }
+                webViewController.delegate = self
+            } else {
+                super.prepare(for: segue, sender: sender)
+            }
+        }
+        
     }
+    
+}
+
+extension AuthViewController: WebViewViewControllerDelegate {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        //TODO: Дописать код
+    }
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        dismiss(animated: true)
+    }
+    
     
 }
 
