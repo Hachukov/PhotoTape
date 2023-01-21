@@ -8,18 +8,25 @@
 import UIKit
 import WebKit
 
-class WebViewViewController: UIViewController{
+final class WebViewViewController: UIViewController{
     
     private let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     
     weak var delegate: WebViewViewControllerDelegate?
     
+    private let progressView: UIProgressView = {
+       let progressView = UIProgressView()
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.progressTintColor = .ypBlack
+        progressView.progress = 0.5
+        return progressView
+    }()
+    
     private let backwardButton: UIButton = {
         let backwardButton = UIButton()
-        backwardButton.setImage(UIImage(named: "Backward"), for: .normal)
+        backwardButton.setImage(UIImage(named: "Backward")?.withRenderingMode(.alwaysTemplate), for: .normal)
         backwardButton.translatesAutoresizingMaskIntoConstraints = false
         backwardButton.tintColor = .ypBlack
-        backwardButton.backgroundColor = .ypBlack
         backwardButton.addTarget(nil, action: #selector(didTapBackButton), for: .touchUpInside)
         return backwardButton
     }()
@@ -34,6 +41,7 @@ class WebViewViewController: UIViewController{
         super.viewDidLoad()
         view.addSubview(wVCWebView)
         view.addSubview(backwardButton)
+        view.addSubview(progressView)
         
         wVCWebView.navigationDelegate = self
         
@@ -73,7 +81,7 @@ class WebViewViewController: UIViewController{
         var constraints = [NSLayoutConstraint]()
         
         constraints.append( wVCWebView.topAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 33))
         constraints.append( wVCWebView.leftAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor))
         constraints.append( wVCWebView.bottomAnchor
@@ -83,13 +91,20 @@ class WebViewViewController: UIViewController{
         
         
         constraints.append(backwardButton.topAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 59))
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 33))
         constraints.append(backwardButton.leftAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16))
         constraints.append(backwardButton.heightAnchor
             .constraint(equalToConstant: 15.59))
         constraints.append(backwardButton.widthAnchor
             .constraint(equalToConstant: 8.97))
+        
+        constraints.append(progressView.topAnchor
+            .constraint(equalTo: backwardButton.bottomAnchor))
+        constraints.append(progressView.leadingAnchor
+            .constraint(equalTo: view.leadingAnchor))
+        constraints.append(progressView.trailingAnchor
+            .constraint(equalTo: view.trailingAnchor))
         
         NSLayoutConstraint.activate(constraints)
     }
@@ -98,6 +113,8 @@ class WebViewViewController: UIViewController{
        
         delegate?.webViewViewControllerDidCancel(self)
     }
+    
+
 }
 // реализация метода WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
@@ -109,4 +126,38 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
+}
+
+// реализация технологии KVO для отслеживание прогресса загрузки webView
+extension WebViewViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        wVCWebView.addObserver(
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            options: .new,
+            context: nil)
+        updateProgress()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        wVCWebView.removeObserver(self,
+                                  forKeyPath: #keyPath(WKWebView.estimatedProgress),
+                                  context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath(WKWebView.estimatedProgress) {
+            updateProgress()
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+
+    private func updateProgress() {
+        progressView.progress = Float(wVCWebView.estimatedProgress)
+        progressView.isHidden = fabs(wVCWebView.estimatedProgress - 1.0) <= 0.0001
+    }
+    
 }
