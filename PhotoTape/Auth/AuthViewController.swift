@@ -11,6 +11,8 @@ class AuthViewController: UIViewController {
     
     let sigwayIdForWebView = "ShowWebView"
     
+    weak var delegate: AuthViewControllerDelegate?
+    
     private let unsplashLogo: UIImageView = {
         let unsplashLogo = UIImageView()
         unsplashLogo.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +31,7 @@ class AuthViewController: UIViewController {
         loginButton.addTarget(nil,
                               action: #selector(presentWebView),
                               for: .touchUpInside)
-       
+        
         return loginButton
     }()
     
@@ -37,10 +39,11 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(unsplashLogo)
         view.addSubview(loginButton)
+        print(UserDefaults.standard.string(forKey: "oAuth2Token"))
         
         addConstraints()
     }
-
+    
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
         
@@ -71,20 +74,26 @@ class AuthViewController: UIViewController {
                 super.prepare(for: segue, sender: sender)
             }
         }
-        
     }
-    
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
+    
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //TODO: Дописать код
+        OAuth2Service.shared.fetchOAuthToken(code) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                OAuth2TokenStorage.shared.token = token
+                self.delegate?.authViewViewController(self, didAuthenticateWithCode: token)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
     }
-    
-    
 }
 

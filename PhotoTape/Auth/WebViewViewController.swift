@@ -42,6 +42,7 @@ final class WebViewViewController: UIViewController{
         view.addSubview(wVCWebView)
         view.addSubview(backwardButton)
         view.addSubview(progressView)
+        print(UserDefaults.standard.string(forKey: "oAuth2Token") ?? "Что-то такое ")
         
         wVCWebView.navigationDelegate = self
         
@@ -59,23 +60,7 @@ final class WebViewViewController: UIViewController{
         wVCWebView.load(request)
         addConstraints()
     }
-    
 
-    // получаем значение code из навигационного действия navigationAction URL
-    private func code(from navigationAction: WKNavigationAction) -> String? {
-        if
-            let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == "code" })
-                
-        {
-            return codeItem.value
-        } else {
-            return nil
-        }
-    }
     
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
@@ -130,8 +115,8 @@ extension WebViewViewController: WKNavigationDelegate {
 
 // реализация технологии KVO для отслеживание прогресса загрузки webView
 extension WebViewViewController {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         wVCWebView.addObserver(
             self,
             forKeyPath: #keyPath(WKWebView.estimatedProgress),
@@ -140,8 +125,26 @@ extension WebViewViewController {
         updateProgress()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    
+
+    // получаем значение code из навигационного действия navigationAction URL
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code" })
+                
+        {
+            return codeItem.value
+        } else {
+            return nil
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         wVCWebView.removeObserver(self,
                                   forKeyPath: #keyPath(WKWebView.estimatedProgress),
                                   context: nil)

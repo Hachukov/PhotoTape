@@ -15,3 +15,6 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 
+protocol AuthViewControllerDelegate: AnyObject {
+    func authViewViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
+}
