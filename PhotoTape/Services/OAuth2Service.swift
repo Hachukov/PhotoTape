@@ -12,13 +12,20 @@ final class OAuth2TokenStorage {
     static let shared = OAuth2TokenStorage()
     private let oAuth2Token = "oAuth2Token"
     
+    
+
     var token: String? {
         get {
             UserDefaults.standard.string(forKey: oAuth2Token)
-         
+
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: oAuth2Token)
+            if let token = newValue {
+                UserDefaults.standard.set(newValue, forKey: oAuth2Token)
+            } else {
+                UserDefaults.standard.removeObject(forKey: oAuth2Token)
+            }
+            
         }
     }
 }
@@ -92,12 +99,12 @@ extension OAuth2Service {
     }
 }
 // MARK: - HTTP Request
-fileprivate let DefaultBaseURL = URL(string: "https://api.unsplash.com")!
+
 extension URLRequest {
     static func makeHTTPRequest(
         path: String,
         httpMethod: String,
-        baseURL: URL = DefaultBaseURL
+        baseURL: URL = defaultBaseURL
     ) -> URLRequest {
         
         

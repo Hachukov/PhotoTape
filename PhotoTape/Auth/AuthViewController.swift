@@ -85,7 +85,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             switch result {
             case .success(let token):
                 OAuth2TokenStorage.shared.token = token
-                self.delegate?.authViewViewController(self, didAuthenticateWithCode: token)
+                self.delegate?.authViewViewController(self, didAuthenticateWithCode: code)
             case .failure(let error):
                 print(error)
             }
