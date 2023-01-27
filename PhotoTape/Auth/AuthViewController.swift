@@ -39,8 +39,6 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(unsplashLogo)
         view.addSubview(loginButton)
-        print(UserDefaults.standard.string(forKey: "oAuth2Token"))
-        
         addConstraints()
     }
     
@@ -63,16 +61,15 @@ class AuthViewController: UIViewController {
     
     @objc func presentWebView() {
         performSegue(withIdentifier: sigwayIdForWebView, sender: nil)
-        
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == sigwayIdForWebView {
-                guard
-                    let webViewController = segue.destination as? WebViewViewController
-                else { fatalError("Failed to prepare for \(sigwayIdForWebView)") }
-                webViewController.delegate = self
-            } else {
-                super.prepare(for: segue, sender: sender)
-            }
+    }
+    
+    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == sigwayIdForWebView {
+            guard let webViewController = segue.destination as? WebViewViewController
+            else { fatalError("Failed to prepare for \(sigwayIdForWebView)") }
+            webViewController.delegate = self
+        } else {
+            super.prepare(for: segue, sender: sender)
         }
     }
 }
@@ -85,7 +82,9 @@ extension AuthViewController: WebViewViewControllerDelegate {
             switch result {
             case .success(let token):
                 OAuth2TokenStorage.shared.token = token
-                self.delegate?.authViewViewController(self, didAuthenticateWithCode: code)
+                self.delegate?.authViewViewController(self, didAuthenticateWithCode: token)
+                print("token = \(token)")
+                print("code = \(code)")
             case .failure(let error):
                 print(error)
             }

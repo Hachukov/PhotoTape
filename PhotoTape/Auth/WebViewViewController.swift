@@ -15,7 +15,7 @@ final class WebViewViewController: UIViewController{
     weak var delegate: WebViewViewControllerDelegate?
     
     private let progressView: UIProgressView = {
-       let progressView = UIProgressView()
+        let progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressTintColor = .ypBlack
         progressView.progress = 0.5
@@ -36,13 +36,20 @@ final class WebViewViewController: UIViewController{
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
     }()
-
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        wVCWebView.removeObserver(self,
+                                  forKeyPath: #keyPath(WKWebView.estimatedProgress),
+                                  context: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(wVCWebView)
         view.addSubview(backwardButton)
         view.addSubview(progressView)
-        print(UserDefaults.standard.string(forKey: "oAuth2Token") ?? "Что-то такое ")
         
         wVCWebView.navigationDelegate = self
         
@@ -60,7 +67,7 @@ final class WebViewViewController: UIViewController{
         wVCWebView.load(request)
         addConstraints()
     }
-
+    
     
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
@@ -95,11 +102,9 @@ final class WebViewViewController: UIViewController{
     }
     
     @objc private func didTapBackButton() {
-       
+        
         delegate?.webViewViewControllerDidCancel(self)
     }
-    
-
 }
 // реализация метода WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
@@ -108,27 +113,17 @@ extension WebViewViewController: WKNavigationDelegate {
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            print("decisionHandler(.cancel)")
             decisionHandler(.cancel)
+            
         } else {
+            print("decisionHandler(.allow)")
             decisionHandler(.allow)
+            
         }
     }
 }
-
-// реализация технологии KVO для отслеживание прогресса загрузки webView
-extension WebViewViewController {
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        wVCWebView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
-        updateProgress()
-    }
     
-    
-
     // получаем значение code из навигационного действия navigationAction URL
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
@@ -144,14 +139,19 @@ extension WebViewViewController {
             return nil
         }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        wVCWebView.removeObserver(self,
-                                  forKeyPath: #keyPath(WKWebView.estimatedProgress),
-                                  context: nil)
+
+// реализация технологии KVO для отслеживание прогресса загрузки webView
+extension WebViewViewController {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        wVCWebView.addObserver(
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            options: .new,
+            context: nil)
+        updateProgress()
     }
-    
+        
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress) {
             updateProgress()
@@ -159,10 +159,9 @@ extension WebViewViewController {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-
+    
     private func updateProgress() {
         progressView.progress = Float(wVCWebView.estimatedProgress)
         progressView.isHidden = fabs(wVCWebView.estimatedProgress - 1.0) <= 0.0001
     }
-    
 }
