@@ -295,7 +295,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IqA-iJ-JUz"/>
-                        <color key="backgroundColor" name="YP Red"/>
+                        <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="eUL-Jb-EQc" firstAttribute="centerX" secondItem="Hlu-uf-i8M" secondAttribute="centerX" id="cRh-Im-CzI"/>
                             <constraint firstItem="eUL-Jb-EQc" firstAttribute="centerY" secondItem="Hlu-uf-i8M" secondAttribute="centerY" id="qs8-Bf-CbF"/>
@@ -324,9 +324,6 @@
         </namedColor>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="YP Red">
-            <color red="0.96100002527236938" green="0.41999998688697815" blue="0.42399999499320984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

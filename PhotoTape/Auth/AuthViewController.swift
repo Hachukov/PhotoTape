@@ -39,6 +39,7 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(unsplashLogo)
         view.addSubview(loginButton)
+        //splashDelegate = SplashViewController()
         addConstraints()
     }
     
@@ -85,6 +86,8 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 self.delegate?.authViewViewController(self, didAuthenticateWithCode: token)
                 print("token = \(token)")
                 print("code = \(code)")
+                self.switchToTabBarController()
+                
             case .failure(let error):
                 print(error)
             }
@@ -96,3 +99,13 @@ extension AuthViewController: WebViewViewControllerDelegate {
     }
 }
 
+
+extension AuthViewController {
+    // TODO: нужно переделать (метод повторяется)
+    private func switchToTabBarController() {
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
+            .instantiateViewController(withIdentifier: "TabBarViewController")
+        window.rootViewController = tabBarController
+    }
+}

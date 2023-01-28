@@ -18,6 +18,7 @@ final class WebViewViewController: UIViewController{
         let progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressTintColor = .ypBlack
+        progressView.backgroundColor = .white
         progressView.progress = 0.5
         return progressView
     }()
@@ -71,21 +72,17 @@ final class WebViewViewController: UIViewController{
     
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
+
         
-        constraints.append( wVCWebView.topAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 33))
-        constraints.append( wVCWebView.leftAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor))
-        constraints.append( wVCWebView.bottomAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
-        constraints.append( wVCWebView.rightAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor))
+        constraints.append(wVCWebView.widthAnchor.constraint(equalTo: view.widthAnchor))
+        constraints.append(wVCWebView.topAnchor.constraint(equalTo: view.topAnchor))
+        constraints.append(wVCWebView.bottomAnchor.constraint(equalTo: view.bottomAnchor))
         
         
         constraints.append(backwardButton.topAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 33))
+            .constraint(equalTo: view.topAnchor, constant: 33))
         constraints.append(backwardButton.leftAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16))
+            .constraint(equalTo: view.leftAnchor, constant: 16))
         constraints.append(backwardButton.heightAnchor
             .constraint(equalToConstant: 15.59))
         constraints.append(backwardButton.widthAnchor
@@ -113,11 +110,8 @@ extension WebViewViewController: WKNavigationDelegate {
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            print("decisionHandler(.cancel)")
             decisionHandler(.cancel)
-            
         } else {
-            print("decisionHandler(.allow)")
             decisionHandler(.allow)
             
         }
