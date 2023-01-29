@@ -19,7 +19,7 @@ final class WebViewViewController: UIViewController{
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressTintColor = .ypBlack
         progressView.backgroundColor = .white
-        progressView.progress = 0.5
+        progressView.progress = 0.0
         return progressView
     }()
     
@@ -84,9 +84,9 @@ final class WebViewViewController: UIViewController{
         constraints.append(backwardButton.leftAnchor
             .constraint(equalTo: view.leftAnchor, constant: 16))
         constraints.append(backwardButton.heightAnchor
-            .constraint(equalToConstant: 15.59))
+            .constraint(equalToConstant: 44))
         constraints.append(backwardButton.widthAnchor
-            .constraint(equalToConstant: 8.97))
+            .constraint(equalToConstant: 44))
         
         constraints.append(progressView.topAnchor
             .constraint(equalTo: backwardButton.bottomAnchor))
@@ -155,7 +155,7 @@ extension WebViewViewController {
     }
     
     private func updateProgress() {
-        progressView.progress = Float(wVCWebView.estimatedProgress)
+        progressView.setProgress(Float(wVCWebView.estimatedProgress), animated: true)
         progressView.isHidden = fabs(wVCWebView.estimatedProgress - 1.0) <= 0.0001
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class AuthViewController: UIViewController {
     
-    let sigwayIdForWebView = "ShowWebView"
+    let segueIdForWebView = "ShowWebView"
     
     weak var delegate: AuthViewControllerDelegate?
     
@@ -39,7 +39,6 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(unsplashLogo)
         view.addSubview(loginButton)
-        //splashDelegate = SplashViewController()
         addConstraints()
     }
     
@@ -61,13 +60,13 @@ class AuthViewController: UIViewController {
     }
     
     @objc func presentWebView() {
-        performSegue(withIdentifier: sigwayIdForWebView, sender: nil)
+        performSegue(withIdentifier: segueIdForWebView, sender: nil)
     }
     
     override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == sigwayIdForWebView {
+        if segue.identifier == segueIdForWebView {
             guard let webViewController = segue.destination as? WebViewViewController
-            else { fatalError("Failed to prepare for \(sigwayIdForWebView)") }
+            else { fatalError("Failed to prepare for \(segueIdForWebView)") }
             webViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)

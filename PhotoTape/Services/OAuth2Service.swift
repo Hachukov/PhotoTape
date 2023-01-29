@@ -9,23 +9,20 @@ import Foundation
 
 final class OAuth2TokenStorage {
     
+    
     static let shared = OAuth2TokenStorage()
     private let oAuth2Token = "oAuth2Token"
-    
-    
 
     var token: String? {
         get {
             UserDefaults.standard.string(forKey: oAuth2Token)
-
         }
         set {
             if let token = newValue {
-                UserDefaults.standard.set(newValue, forKey: oAuth2Token)
+                UserDefaults.standard.set(token, forKey: oAuth2Token)
             } else {
                 UserDefaults.standard.removeObject(forKey: oAuth2Token)
             }
-            
         }
     }
 }
@@ -41,7 +38,6 @@ final class OAuth2Service {
         set {
             OAuth2TokenStorage().token = newValue
         }
-        
     }
     
     // получает code на вход и, используя его, делает POST-запрос с указанными в документации параметрами.
