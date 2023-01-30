@@ -23,7 +23,7 @@ class AuthViewController: UIViewController {
     private let  loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.setTitle("Войти ", for: .normal)
+        loginButton.setTitle("Войти", for: .normal)
         loginButton.backgroundColor = .ypWhite
         loginButton.setTitleColor(UIColor.ypBlack, for: .normal)
         loginButton.layer.cornerRadius = 16
