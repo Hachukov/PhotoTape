@@ -8,7 +8,7 @@
 import UIKit
 import ProgressHUD
 
-final class SplashViewController: UIViewController, AuthViewControllerDelegate {
+final class SplashViewController: UIViewController {
     
     // MARK: - Properties
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
@@ -32,39 +32,18 @@ final class SplashViewController: UIViewController, AuthViewControllerDelegate {
         setNeedsStatusBarAppearanceUpdate()
     }
     
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Methods
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
-        window.rootViewController = tabBarController
-    }
-
-    func authViewViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        ProgressHUD.show()
-        
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.fetchOAuthToken(code)
-        }
-    }
-    
-    private func fetchOAuthToken(_ code: String) {
-        OAuth2Service.shared.fetchOAuthToken(code) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.switchToTabBarController()
-                ProgressHUD.dismiss()
-            case .failure:
-                ProgressHUD.dismiss()
-                break
-            }
-        }
+            window.rootViewController = tabBarController
     }
 }
-
+    
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Проверим, что переходим на авторизацию
@@ -81,5 +60,31 @@ extension SplashViewController {
         } else {
             super.prepare(for: segue, sender: sender)
            }
+    }
+}
+
+extension SplashViewController: AuthViewControllerDelegate {
+    // MARK: - Methods AuthViewControllerDelegate
+    func authViewViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+        ProgressHUD.show()
+        
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.fetchOAuthToken(code)
+        }
+    }
+    
+    private func fetchOAuthToken(_ code: String) {
+        oauth2Service.fetchOAuthToken(code) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.switchToTabBarController()
+                ProgressHUD.dismiss()
+            case .failure:
+                ProgressHUD.dismiss()
+                break
+            }
+        }
     }
 }

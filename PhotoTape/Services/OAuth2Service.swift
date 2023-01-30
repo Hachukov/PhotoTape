@@ -7,30 +7,12 @@
 
 import Foundation
 
-final class OAuth2TokenStorage {
-    
-    
-    static let shared = OAuth2TokenStorage()
-    private let oAuth2Token = "oAuth2Token"
-
-    var token: String? {
-        get {
-            UserDefaults.standard.string(forKey: oAuth2Token)
-        }
-        set {
-            if let token = newValue {
-                UserDefaults.standard.set(token, forKey: oAuth2Token)
-            } else {
-                UserDefaults.standard.removeObject(forKey: oAuth2Token)
-            }
-        }
-    }
-}
-
 final class OAuth2Service {
     
     static let shared = OAuth2Service()
+    
     private let urlSession = URLSession.shared
+    
     private (set) var authToken: String? {
         get {
             return OAuth2TokenStorage().token

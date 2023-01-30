@@ -10,6 +10,7 @@ import WebKit
 
 final class WebViewViewController: UIViewController{
     
+    //MARK: - Properties
     private let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     
     weak var delegate: WebViewViewControllerDelegate?
@@ -38,7 +39,7 @@ final class WebViewViewController: UIViewController{
         return webView
     }()
     
-    
+    // MARK: - Lifecycle
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         wVCWebView.removeObserver(self,
@@ -69,7 +70,7 @@ final class WebViewViewController: UIViewController{
         addConstraints()
     }
     
-    
+    // MARK: - Methods
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
 
@@ -105,6 +106,7 @@ final class WebViewViewController: UIViewController{
 }
 // реализация метода WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
+    // MARK: - Methods
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -116,8 +118,6 @@ extension WebViewViewController: WKNavigationDelegate {
             
         }
     }
-}
-    
     // получаем значение code из навигационного действия navigationAction URL
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
@@ -133,6 +133,9 @@ extension WebViewViewController: WKNavigationDelegate {
             return nil
         }
     }
+}
+    
+    
 
 // реализация технологии KVO для отслеживание прогресса загрузки webView
 extension WebViewViewController {
