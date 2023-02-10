@@ -8,11 +8,15 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    private let token = OAuth2TokenStorage.shared.token
+    let profileService = ProfileService.shared
+  
   
     private let profileImage: UIImageView = {
         let profileImage = UIImageView()
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        profileImage.image = UIImage(named: "Photo")
+        profileImage.image = UIImage(systemName: "person")
         
         return profileImage
     }()
@@ -20,7 +24,7 @@ class ProfileViewController: UIViewController {
     private let nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = ""
         nameLabel.textColor = .ypWhite
         return nameLabel
     }()
@@ -28,7 +32,7 @@ class ProfileViewController: UIViewController {
     private let mailLabel: UILabel = {
         let mailLabel = UILabel()
         mailLabel.translatesAutoresizingMaskIntoConstraints = false
-        mailLabel.text = "@ekaterina_nov"
+        mailLabel.text = ""
         mailLabel.textColor = .ypGray
         mailLabel.font = UIFont(name: "YS Display-Medium", size: 13)
         return mailLabel
@@ -51,6 +55,20 @@ class ProfileViewController: UIViewController {
         view.addSubview(logoutButton)
         
         addConstraints()
+ 
+        profileService.fetchProfile(token!) { result in
+            switch result {
+                
+            case .success(let body):
+                self.nameLabel.text = "\(body.first_name) \(body.last_name)"
+                self.mailLabel.text = "@\(body.username)"
+                print(body.bio)
+            case .failure(let error):
+                print(error)
+            }
+
+        }
+        print("Вью загрузилось")
         
     }
     

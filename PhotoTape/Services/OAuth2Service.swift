@@ -43,7 +43,8 @@ final class OAuth2Service {
                 completion(.success(authToken))
             case .failure(let error):
                 completion(.failure(error))
-            } }
+            }
+        }
         task!.resume() // TODO: - нужно улучшить "force unwrapping"
     }
 }
@@ -108,8 +109,7 @@ enum NetworkError: Error {
 }
 extension URLSession {
     func data(
-        for request: URLRequest,
-        completion: @escaping (Result<Data, Error>) -> Void
+        for request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void
     ) -> URLSessionTask {
         let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
             DispatchQueue.main.async {
