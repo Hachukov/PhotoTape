@@ -29,6 +29,7 @@
 		0B9B47FE29885B63008F236D /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B47FD29885B63008F236D /* OAuth2TokenStorage.swift */; };
 		0B9B4800298C5D0B008F236D /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B47FF298C5D0B008F236D /* UIBlockingProgressHUD.swift */; };
 		0B9B4802298EE524008F236D /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B4801298EE524008F236D /* ProfileService.swift */; };
+		0BAEC646299800D900BF516A /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAEC645299800D900BF516A /* ProfileImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		0B9B47FD29885B63008F236D /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		0B9B47FF298C5D0B008F236D /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		0B9B4801298EE524008F236D /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		0BAEC645299800D900BF516A /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				0B9B47FD29885B63008F236D /* OAuth2TokenStorage.swift */,
 				0B9B47FF298C5D0B008F236D /* UIBlockingProgressHUD.swift */,
 				0B9B4801298EE524008F236D /* ProfileService.swift */,
+				0BAEC645299800D900BF516A /* ProfileImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				0B1CD581297C623C008AAFD4 /* OAuth2Service.swift in Sources */,
 				0B7815B2292E1F9500917F23 /* UIColor+Extentions.swift in Sources */,
 				0B1CD57E2976BC61008AAFD4 /* Protocols.swift in Sources */,
+				0BAEC646299800D900BF516A /* ProfileImageService.swift in Sources */,
 				0B1CD577296B397B008AAFD4 /* Constans.swift in Sources */,
 				0B9B47FE29885B63008F236D /* OAuth2TokenStorage.swift in Sources */,
 				0B1CD583297FCB92008AAFD4 /* SplashViewController.swift in Sources */,

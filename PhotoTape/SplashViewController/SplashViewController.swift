@@ -14,14 +14,17 @@ final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let oauth2Service = OAuth2Service.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
-    
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if let token = OAuth2TokenStorage().token {
+            fetchProfile(token: token)
+            fetchImage(token: token)
             switchToTabBarController()
-            print("\(token)")
+
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
@@ -63,7 +66,40 @@ extension SplashViewController {
            }
     }
 }
+//
+extension SplashViewController {
+    func fetchProfile(token: String) {
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+                
+            case .success(let result):
+                UIBlockingProgressHUD.dismiss()
+                self.switchToTabBarController()
+                print("Проверка \(result)")
+            case .failure(_):
+                UIBlockingProgressHUD.dismiss()
+                break
+            }
+        }
+    }
+}
 
+
+
+extension SplashViewController {
+    func fetchImage(token: String) {
+        self.profileImageService.fetchProfileImageURL(token: token) { result in
+            switch result {
+                
+            case .success(let body):
+                print(body)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
 extension SplashViewController: AuthViewControllerDelegate {
     // MARK: - Methods AuthViewControllerDelegate
     func authViewViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
@@ -78,7 +114,8 @@ extension SplashViewController: AuthViewControllerDelegate {
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success:
+            case .success(let token):
+                self.fetchProfile(token: token)
                 self.switchToTabBarController()
                 UIBlockingProgressHUD.dismiss()
             case .failure:

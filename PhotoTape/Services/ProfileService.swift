@@ -7,20 +7,10 @@
 
 import Foundation
 // MARK:- Модель
-struct Profile: Decodable {
+struct ProfileResult: Codable {
     let username: String
     let first_name: String
     let last_name: String
-    
-    // TODO: - Дописать bio
-//    var name: String {
-//        return "\(first_name) \(last_name)"
-//    }
-//
-//    var loginName: String {
-//        return "@\(username)"
-//    }
-    
     let bio: String?
     
     enum CodingKeys: String, CodingKey {
@@ -32,20 +22,18 @@ struct Profile: Decodable {
     }
 }
 
-struct ProfileResult: Codable {
-    
-}
 
 // TODO: - метод fetchProfile не должен приводить к гонкам
 final class ProfileService {
     let session = URLSession.shared
     private var task: URLSessionTask?
     static let shared = ProfileService()
+    private(set) var profile: ProfileResult?
 }
 
 extension ProfileService {
 
-    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+    func fetchProfile(_ token: String, completion: @escaping (Result<ProfileResult, Error>) -> Void) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.unsplash.com"
@@ -72,12 +60,12 @@ extension ProfileService {
 extension ProfileService {
     private func object(
         for request: URLRequest,
-        completion: @escaping (Result<Profile, Error>) -> Void
+        completion: @escaping (Result<ProfileResult, Error>) -> Void
     ) -> URLSessionTask {
         let decoder = JSONDecoder()
         return session.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<Profile, Error> in
-                Result { try decoder.decode(Profile.self, from: data) }
+            let response = result.flatMap { data -> Result<ProfileResult, Error> in
+                Result { try decoder.decode(ProfileResult.self, from: data) }
             }
             completion(response)
         }
