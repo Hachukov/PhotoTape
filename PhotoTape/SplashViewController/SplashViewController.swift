@@ -78,6 +78,7 @@ extension SplashViewController {
                 self.switchToTabBarController()
                 print("Проверка \(result)")
             case .failure(_):
+                showErrorAlert()
                 UIBlockingProgressHUD.dismiss()
                 break
             }
@@ -120,9 +121,23 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.switchToTabBarController()
                 UIBlockingProgressHUD.dismiss()
             case .failure:
+                showErrorAlert()
                 UIBlockingProgressHUD.dismiss()
                 break
             }
         }
+    }
+}
+
+
+extension SplashViewController {
+    func showErrorAlert() {
+         let alert = UIAlertController(title: "Что-то пошло не так(",
+                                       message: "Не удалось войти в систему",
+                                       preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
 }
