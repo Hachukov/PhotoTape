@@ -8,7 +8,7 @@
 import UIKit
 
 struct Profile {
-
+    
     var username = ""
     var first_name = ""
     var last_name = ""
@@ -21,12 +21,13 @@ struct Profile {
     }
 }
 
-class ProfileViewController: UIViewController {
-
+final class ProfileViewController: UIViewController {
+    
     private var profile = Profile()
     private let token = OAuth2TokenStorage.shared.token
     private let profileService = ProfileService.shared
-
+    private var profileImageServiceObserver: NSObjectProtocol? = nil
+    
     private let profileImage: UIImageView = {
         let profileImage = UIImageView()
         profileImage.translatesAutoresizingMaskIntoConstraints = false
@@ -50,26 +51,26 @@ class ProfileViewController: UIViewController {
         mailLabel.font = UIFont(name: "YS Display-Medium", size: 13)
         return mailLabel
     }()
-
+    
     private let logoutButton: UIButton = {
         let logoutButton = UIButton()
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        logoutButton.setImage(UIImage(systemName: "ipad.and.arrow.forward"), for: .normal) 
+        logoutButton.setImage(UIImage(systemName: "ipad.and.arrow.forward"), for: .normal)
         logoutButton.tintColor = .ypRed
         return logoutButton
     }()
     
     // MARK: - Lifecycle
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.addSubview(profileImage)
         view.addSubview(nameLabel)
         view.addSubview(mailLabel)
@@ -78,21 +79,31 @@ class ProfileViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let body):
-                    self.profile.last_name = body.last_name
-                    self.profile.first_name = body.first_name
-                    self.profile.username = body.username
-                    self.profile.bio = body.bio!
-                    self.updateProfileDetails(profile: self.profile)
+                self.profile.last_name = body.last_name
+                self.profile.first_name = body.first_name
+                self.profile.username = body.username
+                self.profile.bio = body.bio!
+                self.updateProfileDetails(profile: self.profile)
             case .failure(let error):
                 print(error)
             }
         }
+        
+        
+        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.DidChangeNotification,
+                    object: nil,
+                    queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+        
         addConstraints()
     }
-
+    
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
-
+        
         constraints.append(profileImage.heightAnchor.constraint(equalToConstant: 70))
         constraints.append(profileImage.widthAnchor.constraint(equalToConstant: 70))
         constraints.append(profileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
@@ -112,7 +123,7 @@ class ProfileViewController: UIViewController {
         constraints.append(logoutButton.widthAnchor.constraint(equalToConstant: 20))
         constraints.append(logoutButton.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor))
         constraints.append(logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26))
-               
+        
         NSLayoutConstraint.activate(constraints)
     }
 }
@@ -123,5 +134,16 @@ extension ProfileViewController {
         self.nameLabel.text = profile.name
         self.mailLabel.text = profile.loginName
         
+    }
+}
+
+
+extension ProfileViewController {
+    func updateAvatar() {
+        guard let profileImageURL = ProfileImageService.shared.avatarURL,
+              let url = URL(string: profileImageURL)
+        else { return }
+        
+        // TODO: - Обновить аватар, используя Kingfisher
     }
 }

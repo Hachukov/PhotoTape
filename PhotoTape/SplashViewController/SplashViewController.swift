@@ -93,7 +93,8 @@ extension SplashViewController {
             switch result {
                 
             case .success(let body):
-                print(body)
+                print("Это URL  \(body)")
+                print(token)
             case .failure(let error):
                 print(error)
             }
