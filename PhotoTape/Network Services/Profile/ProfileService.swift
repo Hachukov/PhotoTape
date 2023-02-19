@@ -6,22 +6,6 @@
 //
 
 import Foundation
-// MARK:- Модель
-struct ProfileResult: Codable {
-    let username: String
-    let first_name: String
-    let last_name: String
-    let bio: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case username = "username"
-        case first_name = "first_name"
-        case last_name = "last_name"
-        case bio = "bio"
-  
-    }
-}
-
 
 // TODO: - метод fetchProfile не должен приводить к гонкам
 final class ProfileService {

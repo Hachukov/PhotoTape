@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fRf-7O-m0z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fRf-7O-m0z">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -57,7 +57,7 @@
                                 <color key="backgroundColor" name="YP Black"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="317" id="4Jq-5B-NDq" customClass="ImagesListCell" customModule="PhotoTape" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="317"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="317"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Jq-5B-NDq" id="86N-sh-JjA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="317"/>
@@ -211,7 +211,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQv-wg-2ZX">
-                                <rect key="frame" x="8" y="52" width="24" height="24"/>
+                                <rect key="frame" x="8" y="56" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="a7i-YL-6bQ"/>
                                     <constraint firstAttribute="height" constant="24" id="gBU-B9-HpL"/>
@@ -266,7 +266,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="tfy-9s-NJO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4hl-Ut-uBe">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -316,9 +316,9 @@
         <image name="Backward" width="24" height="24"/>
         <image name="ShareButton" width="100" height="100"/>
         <image name="Vector" width="36.5" height="38"/>
-        <image name="heart.fill" catalog="system" width="128" height="109"/>
-        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="square.stack.fill" catalog="system" width="113" height="128"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="square.stack.fill" catalog="system" width="112" height="128"/>
         <namedColor name="YP Background">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -332,7 +332,7 @@
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

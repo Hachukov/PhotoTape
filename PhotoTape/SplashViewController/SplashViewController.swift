@@ -14,15 +14,25 @@ final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let oauth2Service = OAuth2Service.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
+    private var profileImageURLStorage = ProfileImageURLStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    
+    
+    private (set) var profileImageURL: String? {
+        get {
+            return profileImageURLStorage.imageURL
+        }
+        set {
+            profileImageURLStorage.imageURL = newValue
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if let token = OAuth2TokenStorage().token {
             fetchProfile(token: token)
-            fetchImage(token: token)
             switchToTabBarController()
 
         } else {
@@ -78,7 +88,7 @@ extension SplashViewController {
                 self.switchToTabBarController()
                 print("Проверка \(result)")
             case .failure(_):
-                showErrorAlert()
+                self.showErrorAlert()
                 UIBlockingProgressHUD.dismiss()
                 break
             }
@@ -86,22 +96,6 @@ extension SplashViewController {
     }
 }
 
-
-
-extension SplashViewController {
-    func fetchImage(token: String) {
-        self.profileImageService.fetchProfileImageURL(token: token) { result in
-            switch result {
-                
-            case .success(let body):
-                print("Это URL  \(body)")
-                print(token)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
 extension SplashViewController: AuthViewControllerDelegate {
     // MARK: - Methods AuthViewControllerDelegate
     func authViewViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
@@ -121,7 +115,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.switchToTabBarController()
                 UIBlockingProgressHUD.dismiss()
             case .failure:
-                showErrorAlert()
+                self.showErrorAlert()
                 UIBlockingProgressHUD.dismiss()
                 break
             }

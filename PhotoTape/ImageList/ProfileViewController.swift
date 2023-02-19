@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 struct Profile {
     
@@ -26,7 +27,9 @@ final class ProfileViewController: UIViewController {
     private var profile = Profile()
     private let token = OAuth2TokenStorage.shared.token
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     private var profileImageServiceObserver: NSObjectProtocol? = nil
+    private var profileImageURL: URL?
     
     private let profileImage: UIImageView = {
         let profileImage = UIImageView()
@@ -88,17 +91,22 @@ final class ProfileViewController: UIViewController {
                 print(error)
             }
         }
+
+        fetchImage(token: token!)
         
-        
+     // MARK: - наблюдатель за получением URL аватарки
+
         profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.DidChangeNotification,
                     object: nil,
                     queue: .main
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.updateAvatar()
+            
+            self.updateAvatarImage()
         }
         
         addConstraints()
+
     }
     
     private func addConstraints() {
@@ -137,13 +145,39 @@ extension ProfileViewController {
     }
 }
 
-
 extension ProfileViewController {
-    func updateAvatar() {
-        guard let profileImageURL = ProfileImageService.shared.avatarURL,
-              let url = URL(string: profileImageURL)
-        else { return }
-        
-        // TODO: - Обновить аватар, используя Kingfisher
+    func updateAvatarImage() {
+        let notification = Notification(name: ProfileImageService.DidChangeNotification)
+       print("Вроде работает ")
+        guard let profileImageURL = profileImageURL else { return }
+        let processor = RoundCornerImageProcessor(cornerRadius: 50)
+        profileImage.kf.indicatorType = .activity
+        profileImage.kf.setImage(with: profileImageURL ,
+                                 placeholder: UIImage(named: "placeholder.jpeg"),
+                                 options: [.processor(processor)
+                                          ]) { result in
+            switch result {
+                
+            case .success(let value):
+                print(value.image)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+extension ProfileViewController {
+    func fetchImage(token: String)  {
+        self.profileImageService.fetchProfileImageURL(token: token) { result in
+            switch result {
+                
+            case .success(let body):
+                print("Это URL  \(body.profile_image.small)")
+                self.profileImageURL = URL(string: body.profile_image.small)
+                print(token)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

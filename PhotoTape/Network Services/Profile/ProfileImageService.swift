@@ -7,33 +7,13 @@
 
 import Foundation
 
-
-struct UserResult: Codable {
-    let profile_image: ProfileImagesSize
-    
-    enum CodingKeys: String, CodingKey {
-        case profile_image = "profile_image"
-    }
-}
-
-struct ProfileImagesSize: Codable {
-    
-    let small: String
-    
-    enum CodingKeys: String, CodingKey {
-        case small = "small"
-    }
-}
-
 final class ProfileImageService {
     static let shared = ProfileImageService()
     static let DidChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
-    private let token = OAuth2TokenStorage.shared.token
     private var task: URLSessionTask?
     private(set) var avatarURL: String?
     private let session = URLSession.shared
     private var profileImageURL: URL?
-    
 }
 
 extension ProfileImageService {
@@ -48,7 +28,7 @@ extension ProfileImageService {
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token))", forHTTPHeaderField: "Authorization")
         
-        task = object(for: request) { [self] result in
+        task = object(for: request) { result in
             // TODO: - Нужно потом дописать с использование этого self
             
             switch result {
@@ -64,9 +44,6 @@ extension ProfileImageService {
             }
         }
         task!.resume() // TODO: - нужно улучшить "force unwrapping"
-        
-        
-        
     }
 }
 
