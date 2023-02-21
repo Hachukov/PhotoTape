@@ -12,12 +12,19 @@ final class SplashViewController: UIViewController {
     
     // MARK: - Properties
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
+    private let authViewController = AuthViewController()
     private let oauth2Service = OAuth2Service.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private var profileImageURLStorage = ProfileImageURLStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     
+    private let unsplashImage: UIImageView = {
+        let unsplashImage = UIImageView()
+        unsplashImage.translatesAutoresizingMaskIntoConstraints = false
+        unsplashImage.image = UIImage(named: "Vector")
+        return unsplashImage
+    }()
     
     private (set) var profileImageURL: String? {
         get {
@@ -27,24 +34,49 @@ final class SplashViewController: UIViewController {
             profileImageURLStorage.imageURL = newValue
         }
     }
-    
+    // MARK: -  Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         
         if let token = OAuth2TokenStorage().token {
             fetchProfile(token: token)
             switchToTabBarController()
 
         } else {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            authViewController.modalPresentationStyle = .fullScreen
+            present(authViewController, animated: true)
+            
         }
     }
     
-    // MARK: -  Lifecycle
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(unsplashImage)
+        addConstraints()
+        authViewController.delegate = self
+    }
+    
+    
+    
+    private func addConstraints() {
+        var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(unsplashImage.centerXAnchor.constraint(equalTo: view.centerXAnchor))
+        constraints.append(unsplashImage.centerYAnchor.constraint(equalTo: view.centerYAnchor))
+        constraints.append(unsplashImage.widthAnchor.constraint(equalToConstant: 72.52))
+        constraints.append(unsplashImage.heightAnchor.constraint(equalToConstant: 75.11))
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -57,26 +89,7 @@ final class SplashViewController: UIViewController {
             window.rootViewController = tabBarController
     }
 }
-    
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Проверим, что переходим на авторизацию
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            
-            // Доберёмся до первого контроллера в навигации. Мы помним, что в программировании отсчёт начинается с 0?
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
-            
-            // Установим делегатом контроллера наш SplashViewController
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-           }
-    }
-}
-//
+
 extension SplashViewController {
     func fetchProfile(token: String) {
         profileService.fetchProfile(token) { [weak self] result in

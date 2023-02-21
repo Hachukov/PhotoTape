@@ -9,9 +9,10 @@ import UIKit
 
 class AuthViewController: UIViewController {
     //MARK: - Propeties
-    let segueIdForWebView = "ShowWebView"
+    //let segueIdForWebView = "ShowWebView"
     
     weak var delegate: AuthViewControllerDelegate?
+    let webWiewController = WebViewViewController.shared
     
     private let unsplashLogo: UIImageView = {
         let unsplashLogo = UIImageView()
@@ -61,18 +62,20 @@ class AuthViewController: UIViewController {
     }
     
     @objc func presentWebView() {
-        performSegue(withIdentifier: segueIdForWebView, sender: nil)
+        webWiewController.modalPresentationStyle = .fullScreen
+        present(webWiewController, animated: true)
+       // performSegue(withIdentifier: segueIdForWebView, sender: nil)
     }
-    
-    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueIdForWebView {
-            guard let webViewController = segue.destination as? WebViewViewController
-            else { fatalError("Failed to prepare for \(segueIdForWebView)") }
-            webViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
+//
+//    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == segueIdForWebView {
+//            guard let webViewController = segue.destination as? WebViewViewController
+//            else { fatalError("Failed to prepare for \(segueIdForWebView)") }
+//            webViewController.delegate = self
+//        } else {
+//            super.prepare(for: segue, sender: sender)
+//        }
+//    }
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {

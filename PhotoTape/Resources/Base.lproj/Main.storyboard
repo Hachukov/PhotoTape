@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fRf-7O-m0z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -14,7 +14,7 @@
         <!--Auth View Controller-->
         <scene sceneID="6x0-9q-ENU">
             <objects>
-                <viewController id="Adk-Oi-oLq" customClass="AuthViewController" customModule="PhotoTape" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="Adk-Oi-oLq" customClass="AuthViewController" customModule="PhotoTape" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Qz-G5-xh9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,44 +274,12 @@
             </objects>
             <point key="canvasLocation" x="-888" y="858"/>
         </scene>
-        <!--Splash View Controller-->
-        <scene sceneID="ttx-XD-qsS">
-            <objects>
-                <viewController id="fRf-7O-m0z" customClass="SplashViewController" customModule="PhotoTape" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hlu-uf-i8M">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="eUL-Jb-EQc">
-                                <rect key="frame" x="170" y="410" width="74" height="76"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="KYC-gH-IL1"/>
-                                    <constraint firstAttribute="width" constant="74" id="Ybk-eq-Brn"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="IqA-iJ-JUz"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                        <constraints>
-                            <constraint firstItem="eUL-Jb-EQc" firstAttribute="centerX" secondItem="Hlu-uf-i8M" secondAttribute="centerX" id="cRh-Im-CzI"/>
-                            <constraint firstItem="eUL-Jb-EQc" firstAttribute="centerY" secondItem="Hlu-uf-i8M" secondAttribute="centerY" id="qs8-Bf-CbF"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <segue destination="dph-QY-bIG" kind="presentation" identifier="ShowAuthenticationScreen" modalPresentationStyle="overFullScreen" id="mCM-Ms-JyJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="deT-a6-BYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2451" y="86"/>
-        </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
         <image name="10" width="200" height="133"/>
         <image name="Backward" width="24" height="24"/>
         <image name="ShareButton" width="100" height="100"/>
-        <image name="Vector" width="36.5" height="38"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="square.stack.fill" catalog="system" width="112" height="128"/>
         <image name="tabBarItem:Jdl-2A-oMh:image" catalog="system" width="128" height="123">

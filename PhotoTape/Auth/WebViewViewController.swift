@@ -11,6 +11,7 @@ import WebKit
 final class WebViewViewController: UIViewController{
     
     //MARK: - Properties
+    static let shared = WebViewViewController()
     private let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     private var estimatedProgressObservation: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
