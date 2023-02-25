@@ -8,10 +8,11 @@
 import UIKit
 
 class AuthViewController: UIViewController {
-    
-    let segueIdForWebView = "ShowWebView"
+    //MARK: - Propeties
+    //let segueIdForWebView = "ShowWebView"
     
     weak var delegate: AuthViewControllerDelegate?
+    let webWiewController = WebViewViewController.shared
     
     private let unsplashLogo: UIImageView = {
         let unsplashLogo = UIImageView()
@@ -23,7 +24,7 @@ class AuthViewController: UIViewController {
     private let  loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.setTitle("Войти ", for: .normal)
+        loginButton.setTitle("Войти", for: .normal)
         loginButton.backgroundColor = .ypWhite
         loginButton.setTitleColor(UIColor.ypBlack, for: .normal)
         loginButton.layer.cornerRadius = 16
@@ -35,13 +36,15 @@ class AuthViewController: UIViewController {
         return loginButton
     }()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(unsplashLogo)
         view.addSubview(loginButton)
         addConstraints()
     }
-    
+        
+    // MARK: - Methods
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
         
@@ -55,56 +58,33 @@ class AuthViewController: UIViewController {
         constraints.append(loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16))
         constraints.append(loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16))
         
-        
         NSLayoutConstraint.activate(constraints)
     }
     
     @objc func presentWebView() {
-        performSegue(withIdentifier: segueIdForWebView, sender: nil)
+        webWiewController.modalPresentationStyle = .fullScreen
+        present(webWiewController, animated: true)
+       // performSegue(withIdentifier: segueIdForWebView, sender: nil)
     }
-    
-    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueIdForWebView {
-            guard let webViewController = segue.destination as? WebViewViewController
-            else { fatalError("Failed to prepare for \(segueIdForWebView)") }
-            webViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
+//
+//    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == segueIdForWebView {
+//            guard let webViewController = segue.destination as? WebViewViewController
+//            else { fatalError("Failed to prepare for \(segueIdForWebView)") }
+//            webViewController.delegate = self
+//        } else {
+//            super.prepare(for: segue, sender: sender)
+//        }
+//    }
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        OAuth2Service.shared.fetchOAuthToken(code) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let token):
-                OAuth2TokenStorage.shared.token = token
-                self.delegate?.authViewViewController(self, didAuthenticateWithCode: token)
-                print("token = \(token)")
-                print("code = \(code)")
-                self.switchToTabBarController()
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+        self.delegate?.authViewViewController(self, didAuthenticateWithCode: code)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
-    }
-}
-
-
-extension AuthViewController {
-    // TODO: нужно переделать (метод повторяется)
-    private func switchToTabBarController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: "TabBarViewController")
-        window.rootViewController = tabBarController
     }
 }

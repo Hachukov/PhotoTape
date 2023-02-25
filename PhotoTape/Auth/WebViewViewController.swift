@@ -10,8 +10,10 @@ import WebKit
 
 final class WebViewViewController: UIViewController{
     
+    //MARK: - Properties
+    static let shared = WebViewViewController()
     private let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    
+    private var estimatedProgressObservation: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
     
     private let progressView: UIProgressView = {
@@ -38,14 +40,8 @@ final class WebViewViewController: UIViewController{
         return webView
     }()
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        wVCWebView.removeObserver(self,
-                                  forKeyPath: #keyPath(WKWebView.estimatedProgress),
-                                  context: nil)
-    }
-    
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(wVCWebView)
@@ -65,19 +61,23 @@ final class WebViewViewController: UIViewController{
         
         let request = URLRequest(url: url)
         
+        estimatedProgressObservation = wVCWebView.observe(\.estimatedProgress,
+                                                           changeHandler: { [weak self] _, _ in
+            guard let self = self else { return }
+            self.updateProgress()
+        })
+        
         wVCWebView.load(request)
         addConstraints()
     }
     
-    
+    // MARK: - Methods
     private func addConstraints() {
         var constraints = [NSLayoutConstraint]()
-
-        
+  
         constraints.append(wVCWebView.widthAnchor.constraint(equalTo: view.widthAnchor))
         constraints.append(wVCWebView.topAnchor.constraint(equalTo: view.topAnchor))
         constraints.append(wVCWebView.bottomAnchor.constraint(equalTo: view.bottomAnchor))
-        
         
         constraints.append(backwardButton.topAnchor
             .constraint(equalTo: view.topAnchor, constant: 33))
@@ -105,6 +105,7 @@ final class WebViewViewController: UIViewController{
 }
 // реализация метода WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
+    // MARK: - Methods
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -116,8 +117,6 @@ extension WebViewViewController: WKNavigationDelegate {
             
         }
     }
-}
-    
     // получаем значение code из навигационного действия navigationAction URL
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
@@ -133,27 +132,11 @@ extension WebViewViewController: WKNavigationDelegate {
             return nil
         }
     }
+}
 
 // реализация технологии KVO для отслеживание прогресса загрузки webView
 extension WebViewViewController {
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        wVCWebView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
-        updateProgress()
-    }
-        
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-    
+
     private func updateProgress() {
         progressView.setProgress(Float(wVCWebView.estimatedProgress), animated: true)
         progressView.isHidden = fabs(wVCWebView.estimatedProgress - 1.0) <= 0.0001
